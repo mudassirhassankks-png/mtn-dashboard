@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MTN RD Tracker - FINAL FIXED</title>
+<title>MTN RD Tracker - MTN Logo Edition</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'%3E%3Cellipse cx='60' cy='30' rx='55' ry='27' fill='%23FFCC00'/%3E%3Ctext x='60' y='40' font-family='Arial Black' font-size='28' font-weight='900' fill='%23000' text-anchor='middle'%3EMTN%3C/text%3E%3C/svg%3E">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
@@ -19,7 +20,8 @@ body{background:#f5f5f5}
 .top-black{background:#000;color:#fff;padding:16px}
 .stat{display:flex;gap:8px;margin-top:12px}
 .stat-box{flex:1;background:#1a1a1a;border-radius:12px;padding:10px;text-align:center}
-.mtn-logo{width:60px;height:60px;background:#ffcc00;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;margin:0 auto 10px;border:3px solid #000}
+.mtn-logo{width:80px;height:80px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;border:3px solid #000;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.mtn-logo-small{width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #000;overflow:hidden}
 #loginChoice{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#ffcc00}
 .hidden{display:none!important}
 .report-img{width:72px;height:72px;object-fit:cover;border-radius:12px;background:#eee;border:2px solid #f1f5f9;cursor:pointer}
@@ -30,21 +32,19 @@ body{background:#f5f5f5}
 </style>
 </head>
 <body>
-
 <div id="loginChoice">
 <div class="card" style="width:100%;max-width:380px;text-align:center;padding:24px;">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-<span style="font-size:10px;font-weight:800;background:#dcfce7;color:#166534;padding:6px 10px;border-radius:20px;" id="loginStatus">● CLOUD LIVE</span>
+<span style="font-size:10px;font-weight:800;background:#dcfce7;color:#166534;padding:6px 10px;border-radius:20px;" id="loginStatus">● MTN LIVE</span>
 <button onclick="openSettings()" style="width:36px;height:36px;background:#fff;border:2px solid #000;border-radius:10px;cursor:pointer;">⚙️</button>
 </div>
-<div class="mtn-logo">MTN</div>
+<div class="mtn-logo"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><ellipse cx="60" cy="30" rx="55" ry="27" fill="#FFCC00"/><text x="60" y="40" font-family="Arial Black,Arial" font-size="28" font-weight="900" fill="#000" text-anchor="middle" letter-spacing="-1">MTN</text></svg></div>
 <h1 style="font-weight:900;font-size:20px;">MTN RD TRACKER PRO</h1>
-<p style="color:#6b7280;font-size:11px;margin:6px 0 16px;">mtn-tracker-2026 • Photo Fixed 20KB</p>
+<p style="color:#6b7280;font-size:11px;margin:6px 0 16px;">mtn-tracker-2026 • Official MTN Logo</p>
 <button class="btn btn-black" style="margin-bottom:10px;" onclick="showAgent()">I'M AGENT → SUBMIT WORK</button>
 <button class="btn btn-yellow" onclick="showRD()">I'M RD → DASHBOARD</button>
 </div>
 </div>
-
 <div id="settingsModal" class="modal hidden">
 <div class="modal-box">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
@@ -63,35 +63,33 @@ body{background:#f5f5f5}
 </div>
 </div>
 </div>
-
 <div id="agentView" class="hidden">
 <div class="top-yellow">
-<div style="display:flex;gap:10px;align-items:center;"><button onclick="goHome()" style="width:36px;height:36px;background:#000;color:#fff;border-radius:50%;border:none;">←</button><b>Agent Submit</b></div>
+<div style="display:flex;gap:10px;align-items:center;"><button onclick="goHome()" style="width:36px;height:36px;background:#000;color:#fff;border-radius:50%;border:none;">←</button><div class="mtn-logo-small"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><ellipse cx="60" cy="30" rx="55" ry="27" fill="#FFCC00"/><text x="60" y="40" font-family="Arial Black,Arial" font-size="28" font-weight="900" fill="#000" text-anchor="middle">MTN</text></svg></div><b>Agent Submit</b></div>
 <button onclick="openSettings()" style="width:36px;height:36px;background:#fff;border:2px solid #000;border-radius:10px;">⚙️</button>
 </div>
 <div style="padding:14px;max-width:500px;margin:0 auto;">
 <div class="card">
-<input id="agentName" class="input" placeholder="Agent Name * e.g. Mada">
+<input id="agentName" class="input" placeholder="Agent Name">
 <div style="display:flex;gap:8px;margin-top:8px;"><input id="agentLoc" class="input" placeholder="Location" style="flex:1;margin:0"><button onclick="getGPS()" style="padding:12px;border-radius:10px;border:2px solid #000;background:#ffcc00;font-weight:900;">📍 GPS</button></div>
 <div id="gpsInfo" style="font-size:11px;color:#16a34a;font-weight:700;margin-top:6px;"></div>
 </div>
-<input id="deviceNumber" class="input" placeholder="Device Number * e.g. 64">
+<input id="deviceNumber" class="input" placeholder="Device Number">
 <select id="deviceType" class="input"><option>SIM Registration Device</option><option>MTN Mifi</option><option>MTN 4G Router</option><option>Smartphone</option></select>
-<input id="lineCount" type="number" class="input" placeholder="Lines * e.g. 20" style="font-size:20px;font-weight:900;">
+<input id="lineCount" type="number" class="input" placeholder="TOTAL Lines" style="font-size:20px;font-weight:900;">
 <label class="label">Device Photo * (auto 20KB - will show!)</label>
 <input id="photoInput" type="file" accept="image/*" capture="environment" class="input">
 <img id="preview" class="hidden" style="width:100%;height:200px;object-fit:cover;border-radius:12px;margin-top:10px;border:2px solid #000;">
 <div id="photoSizeInfo" style="font-size:11px;color:#666;margin-top:6px;font-weight:700;"></div>
-<button id="submitBtn" class="btn btn-black" style="margin-top:16px;" onclick="submitWork()">🚀 SUBMIT TO CLOUD</button>
+<button id="submitBtn" class="btn btn-black" style="margin-top:16px;" onclick="submitWork()">🚀 SUBMIT TO DASHBOARD</button>
 <div id="successMsg" class="hidden card" style="background:#dcfce7;color:#166534;text-align:center;font-weight:800;margin-top:10px;">✓ Submitted! Photo will show</div>
 <div id="errorMsg" class="hidden card" style="background:#fee2e2;color:#991b1b;text-align:center;font-weight:700;margin-top:10px;"></div>
 </div>
 </div>
-
 <div id="rdView" class="hidden">
 <div class="top-black">
 <div style="display:flex;justify-content:space-between;align-items:center;">
-<div><h1 style="color:#ffcc00;font-weight:900;font-size:18px;">MTN RD DASHBOARD</h1><p style="font-size:10px;color:#aaa;" id="dashInfo">Live • 0 reports</p></div>
+<div style="display:flex;gap:10px;align-items:center;"><div class="mtn-logo-small" style="border-color:#ffcc00;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><ellipse cx="60" cy="30" rx="55" ry="27" fill="#FFCC00"/><text x="60" y="40" font-family="Arial Black,Arial" font-size="28" font-weight="900" fill="#000" text-anchor="middle">MTN</text></svg></div><div><h1 style="color:#ffcc00;font-weight:900;font-size:18px;">MTN RD DASHBOARD</h1><p style="font-size:10px;color:#aaa;" id="dashInfo">Live • 0 reports</p></div></div>
 <div style="display:flex;gap:6px;"><button onclick="openSettings()" style="width:34px;height:34px;background:#1f2937;color:#fff;border:none;border-radius:8px;">⚙️</button><button onclick="logout()" style="background:#ffcc00;color:#000;border:none;padding:7px 14px;border-radius:20px;font-weight:900;font-size:11px;">LOGOUT</button></div>
 </div>
 <div class="stat"><div class="stat-box"><div id="totalDevice" style="color:#ffcc00;font-weight:900;font-size:20px;">0</div><div style="font-size:8px;color:#aaa;">DEVICE</div></div><div class="stat-box"><div id="totalLines" style="color:#fff;font-weight:900;font-size:20px;">0</div><div style="font-size:8px;color:#aaa;">LINES</div></div><div class="stat-box"><div id="totalAgent" style="color:#22c55e;font-weight:900;font-size:20px;">0</div><div style="font-size:8px;color:#aaa;">AGENTS</div></div></div>
@@ -105,29 +103,12 @@ body{background:#f5f5f5}
 <div id="reportsList"></div>
 </div>
 </div>
-
 <div id="imgModal" class="modal hidden" onclick="this.classList.add('hidden')"><div class="modal-box" style="text-align:center;"><img id="fullImg" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px;"><br><button onclick="document.getElementById('imgModal').classList.add('hidden')" class="btn btn-black" style="margin-top:12px;">Close</button></div></div>
 <div id="editModal" class="modal hidden"><div class="modal-box"><h3 style="font-weight:900;margin-bottom:12px;">✏️ Edit Report</h3><input id="editAgentName" class="input" placeholder="Agent Name"><input id="editLocation" class="input" placeholder="Location" style="margin-top:8px;"><input id="editDeviceNumber" class="input" placeholder="Device Number" style="margin-top:8px;"><select id="editDeviceType" class="input" style="margin-top:8px;"><option>SIM Registration Device</option><option>MTN Mifi</option><option>MTN 4G Router</option></select><input id="editLines" type="number" class="input" placeholder="Lines" style="margin-top:8px;"><div style="display:flex;gap:8px;margin-top:14px;"><button onclick="document.getElementById('editModal').classList.add('hidden')" style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;background:#fff;font-weight:700;">Cancel</button><button onclick="saveEdit()" style="flex:1;padding:12px;border-radius:10px;border:none;background:#000;color:#ffcc00;font-weight:800;">Save</button></div></div></div>
-
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDk3VoQTgZ0A68Dok4n8F0V_EkSBEpPO9k",
-  authDomain: "mtn-tracker-2026.firebaseapp.com",
-  projectId: "mtn-tracker-2026",
-  storageBucket: "mtn-tracker-2026.firebasestorage.app",
-  messagingSenderId: "860362652143",
-  appId: "1:860362652143:web:8a82ce6d877152264c5e1a"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-let allReports = [];
-db.collection('mtn_reports').orderBy('createdAt','desc').onSnapshot((snap)=>{
-  allReports=[]; snap.forEach(doc=>{ allReports.push({id:doc.id,...doc.data()}); });
-  render(); updateAllStats();
-  document.getElementById('dashInfo').textContent = 'Live • '+allReports.length+' reports • Cloud OK';
-  document.getElementById('loginStatus').textContent = '● CLOUD LIVE - '+allReports.length;
-}, (err)=>{ alert('Set Firebase Rules to allow read,write: if true; Error: '+err.message); });
-
+const firebaseConfig = { apiKey: "AIzaSyDk3VoQTgZ0A68Dok4n8F0V_EkSBEpPO9k", authDomain: "mtn-tracker-2026.firebaseapp.com", projectId: "mtn-tracker-2026", storageBucket: "mtn-tracker-2026.firebasestorage.app", messagingSenderId: "860362652143", appId: "1:860362652143:web:8a82ce6d877152264c5e1a" };
+firebase.initializeApp(firebaseConfig); const db = firebase.firestore(); let allReports = [];
+db.collection('mtn_reports').orderBy('createdAt','desc').onSnapshot((snap)=>{ allReports=[]; snap.forEach(doc=>{ allReports.push({id:doc.id,...doc.data()}); }); render(); updateAllStats(); document.getElementById('dashInfo').textContent = 'Live • '+allReports.length+' reports • Cloud OK'; document.getElementById('loginStatus').textContent = '● CLOUD LIVE - '+allReports.length; }, (err)=>{ alert('Set Firebase Rules to allow read,write: if true; Error: '+err.message); });
 let currentGPS=null, currentPhotoBase64='', editingId=null;
 function showAgent(){loginChoice.classList.add('hidden');agentView.classList.remove('hidden');}
 function showRD(){loginChoice.classList.add('hidden');rdView.classList.remove('hidden');render();}
@@ -135,85 +116,17 @@ function goHome(){agentView.classList.add('hidden');rdView.classList.add('hidden
 function logout(){ if(confirm('Logout?')){ agentView.classList.add('hidden'); rdView.classList.add('hidden'); loginChoice.classList.remove('hidden'); } }
 function openSettings(){ settingsModal.classList.remove('hidden'); updateAllStats(); }
 function closeSettings(){ settingsModal.classList.add('hidden'); }
-function getGPS(){
-  const info=gpsInfo; info.textContent='Getting GPS...';
-  navigator.geolocation.getCurrentPosition(p=>{
-    currentGPS={lat:p.coords.latitude,lng:p.coords.longitude};
-    agentLoc.value=currentGPS.lat.toFixed(5)+', '+currentGPS.lng.toFixed(5);
-    info.textContent='✅ GPS: '+agentLoc.value;
-  }, e=>{info.textContent='❌ GPS fail: '+e.message;});
-}
-function compressImage(file, maxWidth=600, quality=0.5, callback){
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');
-      let w=img.width, h=img.height; if(w>maxWidth){ h = h * (maxWidth/w); w = maxWidth; }
-      canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h);
-      callback(canvas.toDataURL('image/jpeg', quality));
-    }; img.src=e.target.result;
-  }; reader.readAsDataURL(file);
-}
-photoInput.addEventListener('change', function(){
-  const f=this.files[0]; if(!f) return;
-  photoSizeInfo.textContent='Compressing... Original: '+(f.size/1024).toFixed(0)+'KB';
-  compressImage(f, 600, 0.5, (c)=>{
-    currentPhotoBase64=c; preview.src=c; preview.classList.remove('hidden');
-    const sizeKB = Math.round((c.length * 3/4)/1024);
-    photoSizeInfo.innerHTML='✅ Compressed: <b>'+sizeKB+'KB</b> - Will show in dashboard!';
-  });
-});
-async function submitWork(){
-  const aN=agentName.value.trim(), dN=deviceNumber.value.trim(), lC=lineCount.value.trim();
-  if(!aN||!dN||!lC){alert('Fill all');return;}
-  if(!currentPhotoBase64){alert('Select photo');return;}
-  const btn=submitBtn; const orig=btn.textContent; btn.textContent='⏳ Uploading...'; btn.disabled=true;
-  try{
-    await db.collection('mtn_reports').add({
-      agentName:aN, location:agentLoc.value, gps:currentGPS, deviceNumber:dN, deviceType:deviceType.value,
-      lines:parseInt(lC)||0, photo:currentPhotoBase64, date:new Date().toLocaleString(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    successMsg.classList.remove('hidden');
-    setTimeout(()=>{ deviceNumber.value=''; lineCount.value=''; photoInput.value=''; preview.classList.add('hidden'); currentPhotoBase64=''; photoSizeInfo.textContent=''; successMsg.classList.add('hidden'); btn.textContent=orig; btn.disabled=false; },2000);
-  }catch(err){ errorMsg.textContent='Error: '+err.message; errorMsg.classList.remove('hidden'); btn.textContent=orig; btn.disabled=false; }
-}
+function getGPS(){ const info=gpsInfo; info.textContent='Getting GPS...'; navigator.geolocation.getCurrentPosition(p=>{ currentGPS={lat:p.coords.latitude,lng:p.coords.longitude}; agentLoc.value=currentGPS.lat.toFixed(5)+', '+currentGPS.lng.toFixed(5); info.textContent='✅ GPS: '+agentLoc.value; }, e=>{info.textContent='❌ GPS fail: '+e.message;}); }
+function compressImage(file, maxWidth=600, quality=0.5, callback){ const reader=new FileReader(); reader.onload=e=>{ const img=new Image(); img.onload=()=>{ const canvas=document.createElement('canvas'); let w=img.width, h=img.height; if(w>maxWidth){ h = h * (maxWidth/w); w = maxWidth; } canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h); callback(canvas.toDataURL('image/jpeg', quality)); }; img.src=e.target.result; }; reader.readAsDataURL(file); }
+photoInput.addEventListener('change', function(){ const f=this.files[0]; if(!f) return; photoSizeInfo.textContent='Compressing... Original: '+(f.size/1024).toFixed(0)+'KB'; compressImage(f, 600, 0.5, (c)=>{ currentPhotoBase64=c; preview.src=c; preview.classList.remove('hidden'); const sizeKB = Math.round((c.length * 3/4)/1024); photoSizeInfo.innerHTML='✅ Compressed: <b>'+sizeKB+'KB</b> - Will show in dashboard!'; }); });
+async function submitWork(){ const aN=agentName.value.trim(), dN=deviceNumber.value.trim(), lC=lineCount.value.trim(); if(!aN||!dN||!lC){alert('Fill all');return;} if(!currentPhotoBase64){alert('Select photo');return;} const btn=submitBtn; const orig=btn.textContent; btn.textContent='⏳ Uploading...'; btn.disabled=true; try{ await db.collection('mtn_reports').add({ agentName:aN, location:agentLoc.value, gps:currentGPS, deviceNumber:dN, deviceType:deviceType.value, lines:parseInt(lC)||0, photo:currentPhotoBase64, date:new Date().toLocaleString(), createdAt: firebase.firestore.FieldValue.serverTimestamp() }); successMsg.classList.remove('hidden'); setTimeout(()=>{ deviceNumber.value=''; lineCount.value=''; photoInput.value=''; preview.classList.add('hidden'); currentPhotoBase64=''; photoSizeInfo.textContent=''; successMsg.classList.add('hidden'); btn.textContent=orig; btn.disabled=false; },2000); }catch(err){ errorMsg.textContent='Error: '+err.message; errorMsg.classList.remove('hidden'); btn.textContent=orig; btn.disabled=false; } }
 function viewImageById(id){ const r=allReports.find(x=>x.id===id); if(r&&r.photo){ fullImg.src=r.photo; imgModal.classList.remove('hidden'); } }
 function openEdit(id){ const r=allReports.find(x=>x.id===id); if(!r) return; editingId=id; editAgentName.value=r.agentName||''; editLocation.value=r.location||''; editDeviceNumber.value=r.deviceNumber||''; editDeviceType.value=r.deviceType||'SIM Registration Device'; editLines.value=r.lines||0; editModal.classList.remove('hidden'); }
 async function saveEdit(){ if(!editingId) return; const nd={agentName:editAgentName.value.trim(),location:editLocation.value.trim(),deviceNumber:editDeviceNumber.value.trim(),deviceType:editDeviceType.value,lines:parseInt(editLines.value)||0}; try{ await db.collection('mtn_reports').doc(editingId).update(nd); editModal.classList.add('hidden'); }catch(e){alert(e.message);} }
 async function deleteOne(id){ if(!confirm('Delete?')) return; try{ await db.collection('mtn_reports').doc(id).delete(); }catch(e){alert(e.message);} }
 async function clearAllCloud(){ if(!confirm('DELETE ALL?')) return; if(!confirm('REALLY sure?')) return; try{ const snap=await db.collection('mtn_reports').get(); const batch=db.batch(); snap.forEach(doc=>{batch.delete(doc.ref);}); await batch.commit(); alert('All deleted!'); closeSettings(); }catch(e){alert(e.message);} }
-function updateAllStats(){
-  if(!allReports.length){ settingsStats.innerHTML='No data yet'; topAgentsStats.innerHTML='No data'; topDevicesStats.innerHTML='No data'; return; }
-  const totalLines=allReports.reduce((s,r)=>s+(parseInt(r.lines)||0),0); const totalAgents=new Set(allReports.map(r=>r.agentName)).size;
-  settingsStats.innerHTML=`Total Reports: <b>${allReports.length}</b><br>Total Lines: <b>${totalLines}</b><br>Agents: <b>${totalAgents}</b>`;
-  const ac={}; allReports.forEach(r=>{if(!ac[r.agentName])ac[r.agentName]={lines:0,count:0}; ac[r.agentName].lines+=parseInt(r.lines)||0; ac[r.agentName].count+=1;});
-  const sorted=Object.entries(ac).sort((a,b)=>b[1].lines-a[1].lines).slice(0,5);
-  topAgentsStats.innerHTML=sorted.map(([n,d],i)=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f5f5f5;"><span>${i+1}. ${n}</span><b>${d.lines}</b></div>`).join('');
-  const dc={}; allReports.forEach(r=>{dc[r.deviceType]=(dc[r.deviceType]||0)+1;});
-  topDevicesStats.innerHTML=Object.entries(dc).map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>${k}</span><b>${v}</b></div>`).join('');
-}
-function render(){
-  const s=(searchAgent.value||'').toLowerCase(); const fD=filterDevice.value;
-  let f=allReports.filter(r=>{ const n=(r.agentName||'').toLowerCase(); const dev=(r.deviceNumber||'').toLowerCase(); return (!s||n.includes(s)||dev.includes(s)) && (!fD||r.deviceType===fD); });
-  totalDevice.textContent=f.length; totalLines.textContent=f.reduce((a,r)=>a+(parseInt(r.lines)||0),0); totalAgent.textContent=new Set(f.map(r=>r.agentName)).size;
-  reportsList.innerHTML=f.map(r=>`
-    <div class="card" style="display:flex;gap:10px;">
-      <img src="${r.photo||''}" class="report-img" onclick="viewImageById('${r.id}')" onerror="this.style.display='none'">
-      <div style="flex:1;font-size:12px;">
-        <div style="display:flex;justify-content:space-between;"><b>${r.agentName||''}</b><span style="font-size:9px;background:#fff7cc;padding:3px 6px;border-radius:10px;">${r.date||''}</span></div>
-        <div>📱 ${r.deviceType||''} - <b>${r.deviceNumber||''}</b></div>
-        <div>📶 <b>${r.lines||0}</b> lines | 📍 ${r.location||''}</div>
-        <div style="display:flex;gap:6px;margin-top:8px;">
-          <button onclick="openEdit('${r.id}')" class="btn-small" style="background:#ffcc00;color:#000;">✏️ Edit</button>
-          <button onclick="deleteOne('${r.id}')" class="btn-small" style="background:#fee2e2;color:#991b1b;">🗑️ Delete</button>
-          <button onclick="viewImageById('${r.id}')" class="btn-small" style="background:#f1f5f9;">👁️ Photo</button>
-        </div>
-      </div>
-    </div>
-  `).join('')||'<p style="text-align:center;color:#aaa;margin-top:30px;">No reports</p>';
-}
+function updateAllStats(){ if(!allReports.length){ settingsStats.innerHTML='No data yet'; topAgentsStats.innerHTML='No data'; topDevicesStats.innerHTML='No data'; return; } const totalLines=allReports.reduce((s,r)=>s+(parseInt(r.lines)||0),0); const totalAgents=new Set(allReports.map(r=>r.agentName)).size; settingsStats.innerHTML=`Total Reports: <b>${allReports.length}</b><br>Total Lines: <b>${totalLines}</b><br>Agents: <b>${totalAgents}</b>`; const ac={}; allReports.forEach(r=>{if(!ac[r.agentName])ac[r.agentName]={lines:0,count:0}; ac[r.agentName].lines+=parseInt(r.lines)||0; ac[r.agentName].count+=1;}); const sorted=Object.entries(ac).sort((a,b)=>b[1].lines-a[1].lines).slice(0,5); topAgentsStats.innerHTML=sorted.map(([n,d],i)=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f5f5f5;"><span>${i+1}. ${n}</span><b>${d.lines}</b></div>`).join(''); const dc={}; allReports.forEach(r=>{dc[r.deviceType]=(dc[r.deviceType]||0)+1;}); topDevicesStats.innerHTML=Object.entries(dc).map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:4px 0;"><span>${k}</span><b>${v}</b></div>`).join(''); }
+function render(){ const s=(searchAgent.value||'').toLowerCase(); const fD=filterDevice.value; let f=allReports.filter(r=>{ const n=(r.agentName||'').toLowerCase(); const dev=(r.deviceNumber||'').toLowerCase(); return (!s||n.includes(s)||dev.includes(s)) && (!fD||r.deviceType===fD); }); totalDevice.textContent=f.length; totalLines.textContent=f.reduce((a,r)=>a+(parseInt(r.lines)||0),0); totalAgent.textContent=new Set(f.map(r=>r.agentName)).size; reportsList.innerHTML=f.map(r=>` <div class="card" style="display:flex;gap:10px;"> <img src="${r.photo||''}" class="report-img" onclick="viewImageById('${r.id}')" onerror="this.style.display='none'"> <div style="flex:1;font-size:12px;"> <div style="display:flex;justify-content:space-between;"><b>${r.agentName||''}</b><span style="font-size:9px;background:#fff7cc;padding:3px 6px;border-radius:10px;">${r.date||''}</span></div> <div>📱 ${r.deviceType||''} - <b>${r.deviceNumber||''}</b></div> <div>📶 <b>${r.lines||0}</b> lines | 📍 ${r.location||''}</div> <div style="display:flex;gap:6px;margin-top:8px;"> <button onclick="openEdit('${r.id}')" class="btn-small" style="background:#ffcc00;color:#000;">✏️ Edit</button> <button onclick="deleteOne('${r.id}')" class="btn-small" style="background:#fee2e2;color:#991b1b;">🗑️ Delete</button> <button onclick="viewImageById('${r.id}')" class="btn-small" style="background:#f1f5f9;">👁️ Photo</button> </div> </div> </div> `).join('')||'<p style="text-align:center;color:#aaa;margin-top:30px;">No reports</p>'; }
 </script>
 </body>
 </html>
