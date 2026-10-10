@@ -36,15 +36,16 @@ body{background:#f5f5f5}
 <div class="card" style="width:100%;max-width:380px;text-align:center;padding:24px;">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
 <span style="font-size:10px;font-weight:800;background:#dcfce7;color:#166534;padding:6px 10px;border-radius:20px;" id="loginStatus">● MTN LIVE</span>
-<button onclick="openSettings()" style="width:36px;height:36px;background:#fff;border:2px solid #000;border-radius:10px;cursor:pointer;">⚙️</button>
+<button onclick="promptSettingsPin()" style="width:36px;height:36px;background:#fff;border:2px solid #000;border-radius:10px;cursor:pointer;">⚙️</button>
 </div>
 <div class="mtn-logo"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><ellipse cx="60" cy="30" rx="55" ry="27" fill="#FFCC00"/><text x="60" y="40" font-family="Arial Black,Arial" font-size="28" font-weight="900" fill="#000" text-anchor="middle" letter-spacing="-1">MTN</text></svg></div>
 <h1 style="font-weight:900;font-size:20px;">MTN RD TRACKER PRO</h1>
 <p style="color:#6b7280;font-size:11px;margin:6px 0 16px;">mtn-tracker-2026 • Official MTN Logo</p>
 <button class="btn btn-black" style="margin-bottom:10px;" onclick="showAgent()">I'M AGENT → SUBMIT WORK</button>
-<button class="btn btn-yellow" onclick="showRD()">I'M RD → DASHBOARD</button>
+<button class="btn btn-yellow" onclick="promptRDPin()">I'M RD → DASHBOARD</button>
 </div>
 </div>
+
 <div id="settingsModal" class="modal hidden">
 <div class="modal-box">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
@@ -58,15 +59,16 @@ body{background:#f5f5f5}
 <div style="background:#f8fafc;border-radius:12px;padding:12px;margin-bottom:14px;">
 <h4 style="font-size:12px;font-weight:900;margin-bottom:8px;">🔧 ACTIONS</h4>
 <div class="settings-item"><span style="font-size:13px;font-weight:600;">🚪 Logout to Home</span><button onclick="logout();closeSettings();" class="btn-small" style="background:#000;color:#ffcc00;">Logout</button></div>
-<div class="settings-item"><span style="font-size:13px;font-weight:600;">📊 View Dashboard</span><button onclick="closeSettings();showRD();" class="btn-small" style="background:#ffcc00;color:#000;">Open</button></div>
+<div class="settings-item"><span style="font-size:13px;font-weight:600;">📊 View Dashboard</span><button onclick="closeSettings();promptRDPin();" class="btn-small" style="background:#ffcc00;color:#000;">Open</button></div>
 <div class="settings-item" style="border:none;"><span style="font-size:13px;font-weight:600;color:#991b1b;">🗑️ Delete ALL Cloud Data</span><button onclick="clearAllCloud()" class="btn-small" style="background:#fee2e2;color:#991b1b;">Delete All</button></div>
 </div>
 </div>
 </div>
+
 <div id="agentView" class="hidden">
 <div class="top-yellow">
 <div style="display:flex;gap:10px;align-items:center;"><button onclick="goHome()" style="width:36px;height:36px;background:#000;color:#fff;border-radius:50%;border:none;">←</button><div class="mtn-logo-small"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><ellipse cx="60" cy="30" rx="55" ry="27" fill="#FFCC00"/><text x="60" y="40" font-family="Arial Black,Arial" font-size="28" font-weight="900" fill="#000" text-anchor="middle">MTN</text></svg></div><b>Agent Submit</b></div>
-<button onclick="openSettings()" style="width:36px;height:36px;background:#fff;border:2px solid #000;border-radius:10px;">⚙️</button>
+<button onclick="promptSettingsPin()" style="width:36px;height:36px;background:#fff;border:2px solid #000;border-radius:10px;">⚙️</button>
 </div>
 <div style="padding:14px;max-width:500px;margin:0 auto;">
 <div class="card">
@@ -86,11 +88,12 @@ body{background:#f5f5f5}
 <div id="errorMsg" class="hidden card" style="background:#fee2e2;color:#991b1b;text-align:center;font-weight:700;margin-top:10px;"></div>
 </div>
 </div>
+
 <div id="rdView" class="hidden">
 <div class="top-black">
 <div style="display:flex;justify-content:space-between;align-items:center;">
 <div style="display:flex;gap:10px;align-items:center;"><div class="mtn-logo-small" style="border-color:#ffcc00;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><ellipse cx="60" cy="30" rx="55" ry="27" fill="#FFCC00"/><text x="60" y="40" font-family="Arial Black,Arial" font-size="28" font-weight="900" fill="#000" text-anchor="middle">MTN</text></svg></div><div><h1 style="color:#ffcc00;font-weight:900;font-size:18px;">MTN RD DASHBOARD</h1><p style="font-size:10px;color:#aaa;" id="dashInfo">Live • 0 reports</p></div></div>
-<div style="display:flex;gap:6px;"><button onclick="openSettings()" style="width:34px;height:34px;background:#1f2937;color:#fff;border:none;border-radius:8px;">⚙️</button><button onclick="logout()" style="background:#ffcc00;color:#000;border:none;padding:7px 14px;border-radius:20px;font-weight:900;font-size:11px;">LOGOUT</button></div>
+<div style="display:flex;gap:6px;"><button onclick="promptSettingsPin()" style="width:34px;height:34px;background:#1f2937;color:#fff;border:none;border-radius:8px;">⚙️</button><button onclick="logout()" style="background:#ffcc00;color:#000;border:none;padding:7px 14px;border-radius:20px;font-weight:900;font-size:11px;">LOGOUT</button></div>
 </div>
 <div class="stat"><div class="stat-box"><div id="totalDevice" style="color:#ffcc00;font-weight:900;font-size:20px;">0</div><div style="font-size:8px;color:#aaa;">DEVICE</div></div><div class="stat-box"><div id="totalLines" style="color:#fff;font-weight:900;font-size:20px;">0</div><div style="font-size:8px;color:#aaa;">LINES</div></div><div class="stat-box"><div id="totalAgent" style="color:#22c55e;font-weight:900;font-size:20px;">0</div><div style="font-size:8px;color:#aaa;">AGENTS</div></div></div>
 </div>
@@ -103,13 +106,38 @@ body{background:#f5f5f5}
 <div id="reportsList"></div>
 </div>
 </div>
+
 <div id="imgModal" class="modal hidden" onclick="this.classList.add('hidden')"><div class="modal-box" style="text-align:center;"><img id="fullImg" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px;"><br><button onclick="document.getElementById('imgModal').classList.add('hidden')" class="btn btn-black" style="margin-top:12px;">Close</button></div></div>
 <div id="editModal" class="modal hidden"><div class="modal-box"><h3 style="font-weight:900;margin-bottom:12px;">✏️ Edit Report</h3><input id="editAgentName" class="input" placeholder="Agent Name"><input id="editLocation" class="input" placeholder="Location" style="margin-top:8px;"><input id="editDeviceNumber" class="input" placeholder="Device Number" style="margin-top:8px;"><select id="editDeviceType" class="input" style="margin-top:8px;"><option>SIM Registration Device</option><option>MTN Mifi</option><option>MTN 4G Router</option></select><input id="editLines" type="number" class="input" placeholder="Lines" style="margin-top:8px;"><div style="display:flex;gap:8px;margin-top:14px;"><button onclick="document.getElementById('editModal').classList.add('hidden')" style="flex:1;padding:12px;border-radius:10px;border:1px solid #ddd;background:#fff;font-weight:700;">Cancel</button><button onclick="saveEdit()" style="flex:1;padding:12px;border-radius:10px;border:none;background:#000;color:#ffcc00;font-weight:800;">Save</button></div></div></div>
+
 <script>
+const RD_PIN = "08068486364"; // <-- Zaka iya canza wannan PIN din zuwa duk wanda kake so a nan
+
 const firebaseConfig = { apiKey: "AIzaSyDk3VoQTgZ0A68Dok4n8F0V_EkSBEpPO9k", authDomain: "mtn-tracker-2026.firebaseapp.com", projectId: "mtn-tracker-2026", storageBucket: "mtn-tracker-2026.firebasestorage.app", messagingSenderId: "860362652143", appId: "1:860362652143:web:8a82ce6d877152264c5e1a" };
 firebase.initializeApp(firebaseConfig); const db = firebase.firestore(); let allReports = [];
 db.collection('mtn_reports').orderBy('createdAt','desc').onSnapshot((snap)=>{ allReports=[]; snap.forEach(doc=>{ allReports.push({id:doc.id,...doc.data()}); }); render(); updateAllStats(); document.getElementById('dashInfo').textContent = 'Live • '+allReports.length+' reports • Cloud OK'; document.getElementById('loginStatus').textContent = '● CLOUD LIVE - '+allReports.length; }, (err)=>{ alert('Set Firebase Rules to allow read,write: if true; Error: '+err.message); });
 let currentGPS=null, currentPhotoBase64='', editingId=null;
+
+function promptRDPin(){
+  const userPin = prompt("Enter your Pin:");
+  if(userPin === null) return;
+  if(userPin === RD_PIN){
+    showRD();
+  } else {
+    alert("❌ wrong PIN! try again.");
+  }
+}
+
+function promptSettingsPin(){
+  const userPin = prompt("Enter your R.D pin:");
+  if(userPin === null) return;
+  if(userPin === RD_PIN){
+    openSettings();
+  } else {
+    alert("❌ wrong PIN!");
+  }
+}
+
 function showAgent(){loginChoice.classList.add('hidden');agentView.classList.remove('hidden');}
 function showRD(){loginChoice.classList.add('hidden');rdView.classList.remove('hidden');render();}
 function goHome(){agentView.classList.add('hidden');rdView.classList.add('hidden');loginChoice.classList.remove('hidden');}
