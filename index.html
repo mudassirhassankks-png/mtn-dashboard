@@ -3,21 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MTN Zamfara RD - Agent Submit</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>MTN Zamfara RD System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 body{background:#f2f2f2;color:#111;min-height:100vh}
+.hidden{display:none!important}
+
+/* === LANDING PAGE - EXACT LIKE YOUR SCREENSHOT === */
+.landing-wrap{
+  min-height:100vh;background:#f2f2f2;
+  display:flex;flex-direction:column;align-items:center;
+  padding:90px 20px 40px;
+}
+.mtn-pill{
+  background:#FFCC00;color:#000;font-weight:900;font-size:22px;
+  padding:12px 36px;border-radius:30px;border:3px solid #000;
+  letter-spacing:1px;
+}
+.landing-title{font-size:30px;font-weight:900;margin-top:18px;text-align:center;color:#000}
+.landing-sub{font-size:13px;color:#9a9a9a;margin-top:6px;letter-spacing:.3px}
+.landing-buttons{width:100%;max-width:380px;margin-top:42px;display:flex;flex-direction:column;gap:16px}
+.btn-role{
+  width:100%;padding:20px 16px;border:3px solid #000;border-radius:20px;
+  font-weight:800;font-size:15px;cursor:pointer;transition:.1s;
+}
+.btn-role:active{transform:scale(.97)}
+.btn-agent{background:#fff;color:#000}
+.btn-rd{background:#FFCC00;color:#000}
+.btn-super{background:#000;color:#FFCC00}
+
+/* === INNER HEADER === */
 .mtn-header{background:#FFCC00;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
 .back-btn{background:#000;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;font-size:18px;cursor:pointer}
 .mtn-logo{width:48px;height:48px;background:#fff;border-radius:50%;border:3px solid #000;display:flex;align-items:center;justify-content:center}
 .mtn-logo-inner{background:#FFCC00;color:#000;font-weight:900;font-size:12px;padding:4px 10px;border-radius:20px;border:2px solid #000}
-.mtn-header h1{font-size:18px;font-weight:800;flex:1}
-.settings-wrap{position:relative}
-.settings-btn{background:#fff;border:3px solid #000;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
-.settings-menu{position:absolute;top:52px;right:0;background:#fff;border:3px solid #000;border-radius:14px;width:230px;box-shadow:0 10px 25px rgba(0,0,0,.15);display:none;overflow:hidden;z-index:500}
-.settings-menu button{width:100%;padding:14px 16px;text-align:left;border:none;background:#fff;border-bottom:1px solid #f1f1f1;font-weight:700;font-size:13px;cursor:pointer}
-.settings-menu button:hover{background:#FFF8CC}
+.mtn-header h1{font-size:17px;font-weight:800;flex:1}
+
+/* === FORMS === */
 .container{max-width:480px;margin:0 auto;padding:0 0 80px}
 .form-card{background:#fff;margin:14px;border-radius:22px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
 .label-small{font-size:11px;font-weight:700;color:#6b7280;letter-spacing:.3px;margin-bottom:6px;display:block;text-transform:uppercase}
@@ -31,80 +54,75 @@ body{background:#f2f2f2;color:#111;min-height:100vh}
 .submit-btn:disabled{opacity:.6}
 .history-card{background:#fff;margin:14px;border-radius:18px;padding:14px;border:3px solid #000}
 .history-item{border:2px solid #e5e7eb;border-radius:14px;padding:12px;margin-bottom:10px}
-.action-btn{border:2px solid #000;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:800;cursor:pointer;margin-left:4px}
-.view-btn{background:#fff;color:#000}.edit-btn{background:#FFCC00;color:#000}.delete-btn{background:#ef4444;color:#fff}
+.action-btn{border:2px solid #000;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:800;cursor:pointer}
+.view-btn{background:#fff;color:#000}.delete-btn{background:#ef4444;color:#fff}
 .refresh-btn{background:#000;color:#FFCC00;border:2px solid #000;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:600;padding:16px}
-.modal-box{background:#fff;border:3px solid #000;border-radius:20px;padding:20px;width:100%;max-width:420px}
-.hidden{display:none!important}
-.badge-yellow{background:#FFCC00;color:#000;border:2px solid #000;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:800}
+.modal-box{background:#fff;border:3px solid #000;border-radius:20px;padding:20px;width:100%;max-width:420px;max-height:90vh;overflow:auto}
 .success-box{background:#dcfce7;border:2px solid #16a34a;border-radius:12px;padding:12px;text-align:center;color:#166534;font-weight:700;margin-top:12px;display:none}
 </style>
 </head>
 <body>
-<div class="mtn-header">
-  <button class="back-btn" onclick="switchView('agent')">←</button>
-  <div class="mtn-logo"><div class="mtn-logo-inner">MTN</div></div>
-  <h1 id="headerTitle">Agent Submit</h1>
-  <div class="settings-wrap">
-    <button class="settings-btn" onclick="toggleSettings()">⚙️</button>
-    <div id="settingsMenu" class="settings-menu">
-      <button onclick="switchView('agent')">📝 Agent Submit</button>
-      <button onclick="switchView('rd')">👤 R.D Dashboard - View Submissions</button>
-      <button onclick="switchView('super')">👑 Super Admin - All LGAs</button>
-      <button onclick="refreshAll()">🔄 Refresh</button>
-      <button onclick="clearForm()">🧹 Clear Form</button>
-    </div>
+
+<!-- 1. LANDING - KAMAR HOTON KA -->
+<div id="landingPage" class="landing-wrap">
+  <div class="mtn-pill">MTN</div>
+  <h1 class="landing-title">Zamfara R.D System</h1>
+  <p class="landing-sub">14 LGAs - Isolated Dashboard</p>
+  <div class="landing-buttons">
+    <button class="btn-role btn-agent" onclick="openAgent()">I am Agent - Submit Work</button>
+    <button class="btn-role btn-rd" onclick="openRD()">I am R.D - My LGA Only</button>
+    <button class="btn-role btn-super" onclick="openSuper()">Super Admin - View All</button>
   </div>
 </div>
 
+<!-- 2. INNER HEADER -->
+<div id="innerHeader" class="mtn-header hidden">
+  <button class="back-btn" onclick="goHome()">←</button>
+  <div class="mtn-logo"><div class="mtn-logo-inner">MTN</div></div>
+  <h1 id="headerTitle">Agent Submit</h1>
+</div>
+
 <div class="container">
-  <!-- AGENT VIEW -->
-  <div id="agentView">
+  <!-- AGENT - NO MY SUBMISSIONS, NO PHONE FOR EDIT - GOES TO R.D DIRECT -->
+  <div id="agentView" class="hidden">
     <div class="form-card">
       <label class="label-small">WHICH R.D ARE YOU SUBMITTING TO? (SELECT LGA)</label>
       <select id="agentLGA" class="select-yellow">
         <option value="">-- SELECT LGA / R.D --</option>
         <option>Anka</option><option>Bakura</option><option>Birnin Magaji</option><option>Bukkuyum</option><option>Bungudu</option><option>Tsafe</option><option>Gummi</option><option>Gusau</option><option>Kaura Namoda</option><option>Maradun</option><option>Maru</option><option>Shinkafi</option><option>Talata Mafara</option><option>Zurmi</option>
       </select>
-      <div style="margin-top:12px"><input id="agentName" class="input-light" placeholder="Agent Name e.g. Mudassir Hassan"></div>
-      <div class="row" style="margin-top:12px"><input id="agentLocation" class="input-light" placeholder="Location e.g. Kotorkoshi" style="flex:1"><button class="gps-btn" onclick="getGPS()">📍 GPS</button></div>
-      <div style="margin-top:12px"><input id="agentPhone" class="input-light" placeholder="Your Phone (for Edit/Delete)"></div>
+      <div style="margin-top:12px"><input id="agentName" class="input-light" placeholder="Agent Name"></div>
+      <div class="row" style="margin-top:12px"><input id="agentLocation" class="input-light" placeholder="Location" style="flex:1"><button class="gps-btn" onclick="getGPS()">📍 GPS</button></div>
       <div style="margin-top:12px"><input id="deviceNumber" class="input-light" placeholder="Device Number"></div>
       <div style="margin-top:12px"><select id="deviceType" class="input-light" style="font-weight:700"><option>SIM Registration Device</option><option>Data Device</option><option>Other Device</option></select></div>
       <div style="margin-top:12px"><input id="totalLines" class="input-light input-bold" placeholder="TOTAL Lines" type="number"></div>
       <div style="margin-top:14px"><label class="label-small">DEVICE PHOTO * (AUTO 20KB)</label><div class="photo-box"><input type="file" id="devicePhoto" accept="image/*" style="display:none" onchange="compressPhoto(this)"><button onclick="document.getElementById('devicePhoto').click()" style="padding:8px 14px;border:2px solid #000;border-radius:8px;background:#fff;font-weight:700;cursor:pointer">Choose File</button><span id="fileName" style="font-size:12px;font-weight:600">No file chosen</span></div><img id="previewImg" style="width:100%;margin-top:10px;border-radius:12px;display:none;border:2px solid #000"><p id="compressInfo" style="font-size:11px;color:#6b7280;margin-top:4px"></p></div>
       <button id="submitBtn" class="submit-btn" onclick="submitWork()">🚀 SUBMIT TO R.D</button>
       <p id="agentMsg" style="margin-top:10px;font-size:13px;text-align:center;font-weight:700"></p>
-      <div id="successBox" class="success-box">✅ Submitted! R.D will see it in his Dashboard now. You can submit another one.</div>
-    </div>
-    <div class="history-card">
-      <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:13px;font-weight:800">📋 MY SUBMISSIONS</h3><button class="refresh-btn" onclick="loadMySubmissions()">🔄 Refresh</button></div>
-      <p style="font-size:11px;color:#6b7280;margin:8px 0">Enter your name to manage work. You can VIEW / EDIT / DELETE if mistake.</p>
-      <input id="myNameFilter" class="input-light" placeholder="Enter your name e.g. Mudassir hassan" oninput="loadMySubmissions()">
-      <div id="mySubmissionsList" style="margin-top:12px"></div>
+      <div id="successBox" class="success-box">✅ Sent to R.D Dashboard!</div>
     </div>
   </div>
 
-  <!-- R.D VIEW -->
+  <!-- R.D DASHBOARD - ALL WORK APPEARS HERE -->
   <div id="rdView" class="hidden">
     <div class="form-card">
-      <h3 style="font-weight:800">R.D Login - Isolated Per LGA</h3>
-      <p style="font-size:11px;color:#6b7280;margin-top:4px">Each R.D sees only his LGA. Bungudu cannot see Tsafe.</p>
+      <h3 style="font-weight:800">R.D Login - My LGA Only</h3>
+      <p style="font-size:11px;color:#6b7280">Each R.D sees only his LGA. Bungudu cannot see Tsafe.</p>
       <select id="rdLGASelect" class="input-light" style="margin-top:12px"><option>Anka</option><option>Bakura</option><option>Birnin Magaji</option><option>Bukkuyum</option><option>Bungudu</option><option>Tsafe</option><option>Gummi</option><option>Gusau</option><option>Kaura Namoda</option><option>Maradun</option><option>Maru</option><option>Shinkafi</option><option>Talata Mafara</option><option>Zurmi</option></select>
-      <input id="rdPin" type="password" class="input-light" placeholder="R.D PIN e.g. bungudu2026" style="margin-top:10px">
-      <button class="submit-btn" onclick="loginRD()">Login to My LGA Dashboard</button>
+      <input id="rdPin" type="password" class="input-light" placeholder="" style="margin-top:10px">
+      <button class="submit-btn" onclick="loginRD()">Login My LGA</button>
       <p id="rdLoginMsg" style="color:red;font-size:12px;margin-top:8px"></p>
     </div>
     <div id="rdDashboard" class="history-card hidden"></div>
   </div>
 
-  <!-- SUPER VIEW -->
+  <!-- SUPER ADMIN -->
   <div id="superView" class="hidden">
     <div class="form-card">
       <h3 style="font-weight:800">Super Admin - All 14 LGAs</h3>
-      <input id="superPin" type="password" class="input-light" placeholder="SUPER PIN = SUPER2026" style="margin-top:10px">
-      <button class="submit-btn" style="background:#2563eb;color:#fff" onclick="loginSuper()">Login Super Admin</button>
+      <input id="superPin" type="password" class="input-light" placeholder="" style="margin-top:10px">
+      <button class="submit-btn" onclick="loginSuper()">Login Super Admin</button>
       <p id="superLoginMsg" style="color:red;font-size:12px;margin-top:8px"></p>
     </div>
     <div id="superDashboard" class="history-card hidden"></div>
@@ -113,15 +131,8 @@ body{background:#f2f2f2;color:#111;min-height:100vh}
 
 <div id="detailModal" class="modal" onclick="if(event.target==this)closeModal()">
   <div class="modal-box">
-    <h3 id="modalTitle" style="font-weight:800">Details</h3>
-    <div id="modalContent" style="margin-top:12px;font-size:13px;line-height:1.7"></div>
-    <div id="editForm" class="hidden">
-      <input id="editLocation" class="input-light" style="margin-top:10px" placeholder="Location">
-      <input id="editDeviceNumber" class="input-light" style="margin-top:10px" placeholder="Device Number">
-      <input id="editTotalLines" class="input-light" style="margin-top:10px" placeholder="TOTAL Lines" type="number">
-      <div style="display:flex;gap:10px;margin-top:12px"><button class="submit-btn" style="margin:0;flex:1" onclick="saveEdit()">Save Edit</button><button class="action-btn view-btn" style="flex:1;padding:12px" onclick="closeModal()">Cancel</button></div>
-    </div>
-    <button id="closeBtn" class="action-btn view-btn" style="width:100%;margin-top:12px;padding:12px" onclick="closeModal()">Close</button>
+    <div id="modalContent" style="font-size:13px;line-height:1.7"></div>
+    <button class="action-btn view-btn" style="width:100%;margin-top:12px;padding:12px" onclick="closeModal()">Close</button>
   </div>
 </div>
 
@@ -129,117 +140,47 @@ body{background:#f2f2f2;color:#111;min-height:100vh}
 const RD_ACCOUNTS = {"anka2026":"Anka","bakura2026":"Bakura","birnin2026":"Birnin Magaji","bukkuyum2026":"Bukkuyum","bungudu2026":"Bungudu","tsafe2026":"Tsafe","gummi2026":"Gummi","gusau2026":"Gusau","kaura2026":"Kaura Namoda","maradun2026":"Maradun","maru2026":"Maru","shinkafi2026":"Shinkafi","mafara2026":"Talata Mafara","zurmi2026":"Zurmi"};
 const SUPER_PIN="SUPER2026";
 let allReports = JSON.parse(localStorage.getItem('mtnReports')||'[]');
-let compressedBase64=""; let editingId=null;
-
+let compressedBase64=""; let currentRD=null; let superLogged=false;
 function saveToLocal(){ localStorage.setItem('mtnReports', JSON.stringify(allReports)); }
 
-window.toggleSettings=()=>{const m=document.getElementById('settingsMenu');m.style.display=m.style.display==='block'?'none':'block';}
-window.switchView=(v)=>{
-  document.getElementById('settingsMenu').style.display='none';
-  document.getElementById('agentView').classList.toggle('hidden',v!=='agent');
-  document.getElementById('rdView').classList.toggle('hidden',v!=='rd');
-  document.getElementById('superView').classList.toggle('hidden',v!=='super');
-  document.getElementById('headerTitle').textContent = v==='agent'?'Agent Submit':v==='rd'?'R.D Dashboard':'Super Admin';
-  if(v==='rd') refreshRDIfLogged(); if(v==='super') refreshSuperIfLogged();
-}
-window.refreshAll=()=>{document.getElementById('settingsMenu').style.display='none';loadMySubmissions(); if(currentRD) loginRD(true); if(superLogged) loginSuper(true);}
-window.clearForm=()=>{document.getElementById('settingsMenu').style.display='none'; ['agentLGA','agentName','agentLocation','agentPhone','deviceNumber','totalLines'].forEach(id=>document.getElementById(id).value=''); document.getElementById('previewImg').style.display='none'; document.getElementById('fileName').textContent='No file chosen'; document.getElementById('compressInfo').textContent=''; compressedBase64=''; document.getElementById('successBox').style.display='none';}
+window.goHome=()=>{document.getElementById('landingPage').classList.remove('hidden');document.getElementById('innerHeader').classList.add('hidden');document.getElementById('agentView').classList.add('hidden');document.getElementById('rdView').classList.add('hidden');document.getElementById('superView').classList.add('hidden');}
+window.openAgent=()=>{document.getElementById('landingPage').classList.add('hidden');document.getElementById('innerHeader').classList.remove('hidden');document.getElementById('agentView').classList.remove('hidden');document.getElementById('rdView').classList.add('hidden');document.getElementById('superView').classList.add('hidden');document.getElementById('headerTitle').textContent='Agent Submit';}
+window.openRD=()=>{document.getElementById('landingPage').classList.add('hidden');document.getElementById('innerHeader').classList.remove('hidden');document.getElementById('agentView').classList.add('hidden');document.getElementById('rdView').classList.remove('hidden');document.getElementById('superView').classList.add('hidden');document.getElementById('headerTitle').textContent='R.D Dashboard';}
+window.openSuper=()=>{document.getElementById('landingPage').classList.add('hidden');document.getElementById('innerHeader').classList.remove('hidden');document.getElementById('agentView').classList.add('hidden');document.getElementById('rdView').classList.add('hidden');document.getElementById('superView').classList.remove('hidden');document.getElementById('headerTitle').textContent='Super Admin';}
 
-window.getGPS=()=>{if(!navigator.geolocation){alert('GPS not supported');return;} const btn=event.target; const old=btn.textContent; btn.textContent='...'; navigator.geolocation.getCurrentPosition(p=>{document.getElementById('agentLocation').value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6); btn.textContent=old;},()=>{btn.textContent=old; alert('Failed to get GPS - allow location');});}
-
+window.getGPS=()=>{if(!navigator.geolocation){alert('GPS not supported');return;} const btn=event.target; const old=btn.textContent; btn.textContent='...'; navigator.geolocation.getCurrentPosition(p=>{document.getElementById('agentLocation').value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6); btn.textContent=old;},()=>{btn.textContent=old;});}
 window.compressPhoto=(input)=>{
-  const file=input.files[0]; if(!file) return;
-  document.getElementById('fileName').textContent=file.name;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const img=new Image(); img.onload=()=>{
-      const canvas=document.createElement('canvas'); let w=img.width,h=img.height; const max=800; if(w>h){if(w>max){h*=max/w;w=max}}else{if(h>max){w*=max/h;h=max}}
-      canvas.width=w;canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h);
-      let q=0.7; let b64=canvas.toDataURL('image/jpeg',q);
-      while(b64.length>30000 && q>0.1){q-=0.1; b64=canvas.toDataURL('image/jpeg',q);}
-      compressedBase64=b64;
-      document.getElementById('previewImg').src=b64; document.getElementById('previewImg').style.display='block';
-      document.getElementById('compressInfo').textContent=`Compressed to ~${Math.round(b64.length/1024)}KB (Target 20KB)`;
-    }; img.src=e.target.result;
-  }; reader.readAsDataURL(file);
-};
+  const file=input.files[0]; if(!file) return; document.getElementById('fileName').textContent=file.name;
+  const reader=new FileReader(); reader.onload=e=>{const img=new Image(); img.onload=()=>{const canvas=document.createElement('canvas'); let w=img.width,h=img.height; const max=800; if(w>h){if(w>max){h*=max/w;w=max}}else{if(h>max){w*=max/h;h=max}} canvas.width=w;canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h); let q=0.7; let b64=canvas.toDataURL('image/jpeg',q); while(b64.length>30000 && q>0.1){q-=0.1; b64=canvas.toDataURL('image/jpeg',q);} compressedBase64=b64; document.getElementById('previewImg').src=b64; document.getElementById('previewImg').style.display='block'; document.getElementById('compressInfo').textContent=`~${Math.round(b64.length/1024)}KB`;}; img.src=e.target.result;}; reader.readAsDataURL(file);
+}
 
 window.submitWork=()=>{
-  const lga=document.getElementById('agentLGA').value; const name=document.getElementById('agentName').value.trim(); const loc=document.getElementById('agentLocation').value.trim(); const phone=document.getElementById('agentPhone').value.trim(); const devNum=document.getElementById('deviceNumber').value.trim(); const devType=document.getElementById('deviceType').value; const total=document.getElementById('totalLines').value.trim();
+  const lga=document.getElementById('agentLGA').value; const name=document.getElementById('agentName').value.trim(); const loc=document.getElementById('agentLocation').value.trim(); const devNum=document.getElementById('deviceNumber').value.trim(); const devType=document.getElementById('deviceType').value; const total=document.getElementById('totalLines').value.trim();
   const msg=document.getElementById('agentMsg'); const btn=document.getElementById('submitBtn');
-  if(!lga||!name||!loc||!phone||!devNum||!total){msg.style.color='red'; msg.textContent='Please fill all fields including LGA and Phone.'; return;}
-
-  btn.disabled=true; btn.textContent='Submitting...'; msg.textContent='';
-
-  const newReport = { id: Date.now().toString(), agentName:name, agentPhone:phone, rdLGA:lga, location:loc, deviceNumber:devNum, deviceType:devType, totalLines:total, photo:compressedBase64, dateStr:new Date().toISOString().slice(0,10), fullDate:new Date().toISOString(), createdAt: Date.now() };
-
-  // SAVE LOCALLY - THIS MAKES IT GO TO R.D DASHBOARD IMMEDIATELY
-  allReports.unshift(newReport);
-  saveToLocal();
-
-  // TRY FIREBASE ALSO (if you configure later)
-  try{
-    // if firebase is configured, it will also save there
-    if(window.firebaseSave) window.firebaseSave(newReport);
-  }catch(e){}
-
-  setTimeout(()=>{
-    btn.disabled=false; btn.textContent='🚀 SUBMIT TO R.D';
-    msg.style.color='green'; msg.textContent=`Submitted to R.D ${lga} successfully!`;
-    document.getElementById('successBox').style.display='block';
-    document.getElementById('myNameFilter').value=name;
-    loadMySubmissions();
-    // Clear only device fields, keep name/phone/LGA for next submission
-    document.getElementById('deviceNumber').value=''; document.getElementById('totalLines').value=''; document.getElementById('previewImg').style.display='none'; document.getElementById('fileName').textContent='No file chosen'; compressedBase64='';
-    document.getElementById('successBox').scrollIntoView({behavior:'smooth'});
-  },600);
+  if(!lga||!name||!loc||!devNum||!total){msg.style.color='red'; msg.textContent='Fill all fields.'; return;}
+  btn.disabled=true; btn.textContent='Submitting...';
+  const newReport={id:Date.now().toString(), agentName:name, rdLGA:lga, location:loc, deviceNumber:devNum, deviceType:devType, totalLines:total, photo:compressedBase64, dateStr:new Date().toISOString().slice(0,10)};
+  allReports.unshift(newReport); saveToLocal();
+  setTimeout(()=>{btn.disabled=false; btn.textContent='🚀 SUBMIT TO R.D'; msg.style.color='green'; msg.textContent=`Sent to R.D ${lga}!`; document.getElementById('successBox').style.display='block'; document.getElementById('deviceNumber').value=''; document.getElementById('totalLines').value=''; document.getElementById('previewImg').style.display='none'; document.getElementById('fileName').textContent='No file chosen'; compressedBase64=''; setTimeout(()=>{document.getElementById('successBox').style.display='none'; msg.textContent='';},3000);},600);
 };
 
-window.loadMySubmissions=()=>{
-  const nameFilter=document.getElementById('myNameFilter').value.trim().toLowerCase();
-  const list=document.getElementById('mySubmissionsList');
-  let filtered = allReports;
-  if(nameFilter) filtered = allReports.filter(r=> (r.agentName||'').toLowerCase().includes(nameFilter) || (r.agentPhone||'').includes(nameFilter));
-  if(filtered.length===0){ list.innerHTML='<p style="font-size:12px;color:#999">No submissions yet. Submit work above and it will appear here. Then R.D can see it in his dashboard.</p>'; return; }
-  list.innerHTML=filtered.slice(0,20).map(r=>`
-    <div class="history-item">
-      <div style="display:flex;justify-content:space-between"><b>${r.rdLGA} - ${r.deviceNumber}</b><span class="badge-yellow">${r.totalLines} lines</span></div>
-      <small>${r.dateStr} | Lines: ${r.totalLines} | ${r.location||''} | ${r.agentName}</small>
-      <div style="margin-top:8px;display:flex;gap:4px"><button class="action-btn view-btn" onclick="viewItem('${r.id}')">VIEW</button><button class="action-btn edit-btn" onclick="editItem('${r.id}')">EDIT</button><button class="action-btn delete-btn" onclick="deleteItem('${r.id}')">DELETE</button></div>
-    </div>
-  `).join('');
-};
-
-window.viewItem=(id)=>{ const r=allReports.find(x=>x.id==id); if(!r) return; document.getElementById('modalTitle').textContent='VIEW Submission'; document.getElementById('modalContent').innerHTML=`<p><b>LGA/R.D:</b> ${r.rdLGA}</p><p><b>Agent:</b> ${r.agentName}</p><p><b>Phone:</b> ${r.agentPhone}</p><p><b>Location:</b> ${r.location}</p><p><b>Device:</b> ${r.deviceNumber}</p><p><b>Type:</b> ${r.deviceType}</p><p><b>Total Lines:</b> ${r.totalLines}</p><p><b>Date:</b> ${r.dateStr}</p>${r.photo?`<img src="${r.photo}" style="width:100%;margin-top:10px;border-radius:12px;border:2px solid #000">`:''}`; document.getElementById('editForm').classList.add('hidden'); document.getElementById('closeBtn').classList.remove('hidden'); document.getElementById('detailModal').style.display='flex'; };
-window.editItem=(id)=>{ const r=allReports.find(x=>x.id==id); if(!r) return; editingId=id; document.getElementById('modalTitle').textContent='EDIT - Fix Mistake'; document.getElementById('modalContent').innerHTML=`<p style="font-size:11px">Editing ${r.deviceNumber} - ${r.rdLGA}</p>`; document.getElementById('editLocation').value=r.location||''; document.getElementById('editDeviceNumber').value=r.deviceNumber||''; document.getElementById('editTotalLines').value=r.totalLines||''; document.getElementById('editForm').classList.remove('hidden'); document.getElementById('closeBtn').classList.add('hidden'); document.getElementById('detailModal').style.display='flex'; };
-window.saveEdit=()=>{ const loc=document.getElementById('editLocation').value; const dev=document.getElementById('editDeviceNumber').value; const tot=document.getElementById('editTotalLines').value; const idx=allReports.findIndex(x=>x.id==editingId); if(idx>-1){ allReports[idx].location=loc; allReports[idx].deviceNumber=dev; allReports[idx].totalLines=tot; saveToLocal(); } closeModal(); loadMySubmissions(); if(currentRD) loginRD(true); alert('Updated! R.D dashboard updated too.'); };
-window.deleteItem=(id)=>{ if(!confirm('DELETE? Sure?')) return; allReports=allReports.filter(x=>x.id!=id); saveToLocal(); loadMySubmissions(); if(currentRD) loginRD(true); if(superLogged) loginSuper(true); alert('Deleted!'); };
-window.closeModal=()=>{ document.getElementById('detailModal').style.display='none'; editingId=null; };
-
-let currentRD=null; let superLogged=false;
-function refreshRDIfLogged(){ if(currentRD) loginRD(true); }
-function refreshSuperIfLogged(){ if(superLogged) loginSuper(true); }
+window.viewItem=(id)=>{const r=allReports.find(x=>x.id==id); if(!r)return; document.getElementById('modalContent').innerHTML=`<p><b>LGA:</b> ${r.rdLGA}</p><p><b>Agent:</b> ${r.agentName}</p><p><b>Location:</b> ${r.location}</p><p><b>Device:</b> ${r.deviceNumber}</p><p><b>Type:</b> ${r.deviceType}</p><p><b>Lines:</b> ${r.totalLines}</p><p><b>Date:</b> ${r.dateStr}</p>${r.photo?`<img src="${r.photo}" style="width:100%;margin-top:10px;border-radius:12px;border:2px solid #000">`:''}`; document.getElementById('detailModal').style.display='flex';}
+window.closeModal=()=>{document.getElementById('detailModal').style.display='none';}
+window.deleteItem=(id)=>{if(!confirm('Delete?'))return; allReports=allReports.filter(x=>x.id!=id); saveToLocal(); if(currentRD) loginRD(true); if(superLogged) loginSuper(true);};
 
 window.loginRD=(isRefresh=false)=>{
   const lga=document.getElementById('rdLGASelect').value; const pin=document.getElementById('rdPin').value.toLowerCase().trim();
-  if(!isRefresh){ if(!RD_ACCOUNTS[pin] || RD_ACCOUNTS[pin]!==lga){ document.getElementById('rdLoginMsg').textContent='Invalid PIN. Use e.g. bungudu2026 for Bungudu'; return;} currentRD=lga; document.getElementById('rdLoginMsg').textContent=''; }
-  const my=allReports.filter(r=>r.rdLGA===currentRD);
-  const dash=document.getElementById('rdDashboard'); dash.classList.remove('hidden');
-  const totalLines = my.reduce((s,r)=>s+parseInt(r.totalLines||0),0);
-  dash.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h3>${currentRD} Dashboard</h3><button class="refresh-btn" onclick="loginRD(true)">🔄 Refresh</button></div><p style="font-size:12px;margin:8px 0"><b>${my.length}</b> submissions | <b>${totalLines}</b> total lines</p><p style="font-size:11px;color:#16a34a">✓ New submissions from agents appear here automatically</p>`+ (my.length? my.map(r=>`<div class="history-item"><div><b>${r.agentName}</b> - ${r.deviceNumber} (${r.totalLines} lines)<br><small>${r.dateStr} | ${r.location} | ${r.agentPhone}</small></div><div style="margin-top:6px"><button class="action-btn view-btn" onclick="viewItem('${r.id}')">VIEW</button><button class="action-btn delete-btn" onclick="deleteItem('${r.id}')">DELETE</button></div></div>`).join('') : '<p style="font-size:12px;color:#999;margin-top:10px">No submissions yet for '+currentRD+'. When agent selects '+currentRD+' and submits, it will appear here.</p>');
+  if(!isRefresh){ if(!RD_ACCOUNTS[pin] || RD_ACCOUNTS[pin]!==lga){document.getElementById('rdLoginMsg').textContent='Invalid PIN e.g. bungudu2026'; return;} currentRD=lga; document.getElementById('rdLoginMsg').textContent='';}
+  const my=allReports.filter(r=>r.rdLGA===currentRD); const dash=document.getElementById('rdDashboard'); dash.classList.remove('hidden');
+  const totalLines=my.reduce((s,r)=>s+parseInt(r.totalLines||0),0);
+  dash.innerHTML=`<div style="display:flex;justify-content:space-between"><h3>${currentRD}</h3><button class="refresh-btn" onclick="loginRD(true)">🔄 Refresh</button></div><p style="font-size:12px;margin:8px 0"><b>${my.length}</b> submissions | <b>${totalLines}</b> total lines - Agent work appears here</p>`+(my.length?my.map(r=>`<div class="history-item"><div><b>${r.agentName}</b> - ${r.deviceNumber} (${r.totalLines})<br><small>${r.dateStr} | ${r.location}</small></div><div style="margin-top:8px"><button class="action-btn view-btn" onclick="viewItem('${r.id}')">VIEW</button><button class="action-btn delete-btn" onclick="deleteItem('${r.id}')">DELETE</button></div></div>`).join(''):`<p style="font-size:12px;color:#999">No submissions yet for ${currentRD}</p>`);
 };
 
 window.loginSuper=(isRefresh=false)=>{
-  const pin=document.getElementById('superPin').value.trim();
-  if(!isRefresh){ if(pin!==SUPER_PIN){ document.getElementById('superLoginMsg').textContent='Invalid. Use SUPER2026'; return;} superLogged=true; document.getElementById('superLoginMsg').textContent=''; }
-  const dash=document.getElementById('superDashboard'); dash.classList.remove('hidden');
-  const lgaMap={}; allReports.forEach(r=>{lgaMap[r.rdLGA]=(lgaMap[r.rdLGA]||0)+1});
-  dash.innerHTML=`<div style="display:flex;justify-content:space-between"><h3>Super Admin - All LGAs</h3><button class="refresh-btn" onclick="loginSuper(true)">🔄 Refresh</button></div><p style="font-size:12px;margin:8px 0">Total: <b>${allReports.length}</b> submissions across 14 LGAs</p>`+Object.entries(lgaMap).sort((a,b)=>b[1]-a[1]).map(([l,c])=>`<div class="history-item" style="display:flex;justify-content:space-between"><b>${l}</b><span class="badge-yellow">${c} works</span></div>`).join('')+`<h4 style="margin-top:12px">All Reports</h4>`+allReports.map(r=>`<div class="history-item"><div><b>${r.rdLGA}</b> | ${r.agentName} | ${r.deviceNumber} | ${r.totalLines} lines<br><small>${r.dateStr} - ${r.location}</small></div><div style="margin-top:6px"><button class="action-btn view-btn" onclick="viewItem('${r.id}')">VIEW</button><button class="action-btn delete-btn" onclick="deleteItem('${r.id}')">DELETE</button></div></div>`).join('');
+  const pin=document.getElementById('superPin').value.trim(); if(!isRefresh){ if(pin!==SUPER_PIN){document.getElementById('superLoginMsg').textContent='Invalid PIN SUPER2026'; return;} superLogged=true; document.getElementById('superLoginMsg').textContent='';}
+  const dash=document.getElementById('superDashboard'); dash.classList.remove('hidden'); const lgaMap={}; allReports.forEach(r=>{lgaMap[r.rdLGA]=(lgaMap[r.rdLGA]||0)+1});
+  dash.innerHTML=`<div style="display:flex;justify-content:space-between"><h3>Super Admin</h3><button class="refresh-btn" onclick="loginSuper(true)">🔄 Refresh</button></div><p>Total: <b>${allReports.length}</b></p>`+Object.entries(lgaMap).map(([l,c])=>`<div class="history-item" style="display:flex;justify-content:space-between"><b>${l}</b><span>${c}</span></div>`).join('')+allReports.map(r=>`<div class="history-item"><div><b>${r.rdLGA}</b> | ${r.agentName} | ${r.deviceNumber}</div><div style="margin-top:6px"><button class="action-btn view-btn" onclick="viewItem('${r.id}')">VIEW</button><button class="action-btn delete-btn" onclick="deleteItem('${r.id}')">DELETE</button></div></div>`).join('');
 };
-
-// Init
-loadMySubmissions();
-document.addEventListener('click',e=>{ if(!e.target.closest('.settings-wrap')) document.getElementById('settingsMenu').style.display='none'; });
 </script>
 </body>
 </html>
